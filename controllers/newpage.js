@@ -15,39 +15,37 @@ exports.addNewpage = async (req, res) => {
 };
 
 exports.getNewPage = async (req, res) => {
- 
-    newpage
-      .find({ })
-      .then((data) => res.status(200).send(data))
-      .catch((err) => res.status(400).send("Error: " + err));
-  
-};
-
-exports.getNewPagebyId = async (req, res) => {
-
   newpage
-    .findOne({ _id: req.params.id })
+    .find({})
     .then((data) => res.status(200).send(data))
     .catch((err) => res.status(400).send("Error: " + err));
 };
 
-exports.updatenewPage=async(req,res)=>{
-    newpage.findByIdAndUpdate(req.params.id, {
-        content:req.body?.content,
-        title:req.body?.title,
-        show:req.body?.show
-    })
-        .then(() => {
-            res.status(200).send("News updated successfully");
-        })
-        .catch((err) => res.status(400).send("Error: " + err));
-}
+exports.getNewPagebyId = async (req, res) => {
+  newpage
+    .findOne({ _id: req.query.id })
+    .then((data) => res.status(200).send(data))
+    .catch((err) => res.status(400).send("Error: " + err));
+};
 
-exports.deletenewPage=async(req,res)=>{
-    
-    newpage.findByIdAndUpdate(req.params.id, { $set: { show: req.body.show } })
-        .then(() => {
-            res.status(200).send("New Page deleted successfully");
-        })
-        .catch((err) => res.status(400).send("Error: " + err));
-}
+exports.updatenewPage = async (req, res) => {
+  newpage
+    .findByIdAndUpdate(req.params.id, {
+      content: req.body?.content,
+      title: req.body?.title,
+      show: req.body?.show,
+    })
+    .then(() => {
+      res.status(200).send("News updated successfully");
+    })
+    .catch((err) => res.status(400).send("Error: " + err));
+};
+
+exports.deletenewPage = async (req, res) => {
+  newpage
+    .findByIdAndUpdate(req.params.id, { $set: { show: req.body.show } })
+    .then(() => {
+      res.status(200).send("New Page deleted successfully");
+    })
+    .catch((err) => res.status(400).send("Error: " + err));
+};

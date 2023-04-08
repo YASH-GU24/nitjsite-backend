@@ -18,10 +18,14 @@ exports.showTender = async (req, res) => {
 };
 
 exports.showTenderbyId = async (req, res) => {
-  if(req.params.id){
-    Tender.findById(req.params.id)
-    .then((data) => res.status(200).send(data))
-    .catch((err) => res.status(400).json("Error: " + err));
+  if (req.query.id) {
+    Tender.findById(req.query.id)
+      .then((data) => res.status(200).send(data))
+      .catch((err) => res.status(400).json("Error: " + err));
+  } else {
+    Tender.find({ show: true })
+      .then((data) => res.status(200).send(data))
+      .catch((err) => res.status(400).json("Error: " + err));
   }
 };
 
