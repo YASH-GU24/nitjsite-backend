@@ -8,11 +8,16 @@ module.exports.signInAuthentication = async function (req, res, next) {
   const id = req.params.id;
   const cookie = req.cookies;
   var flag = false;
+  
   if (cookie) flag = true;
 
   try {
     if (flag) {
       const sessionID = cookie.session;
+
+      console.log("cookie", cookie);
+
+      console.log(sessionID, "outside before. Just for checking the type");
 
       let session = await Sessions.findById(sessionID);
       if (session) {
@@ -31,11 +36,16 @@ module.exports.signInAuthentication = async function (req, res, next) {
         next();
         return;
       } else {
+        console.log(sessionID, "False scope.");
+        console.log(typeof(sessionID), "Type inside false scope");
         req.user = {
           isFaculty: false,
           login: false,
         };
       }
+    }
+    else{
+      console.log("By chance if it goes false");
     }
   } catch (error) {
     console.log(error);
