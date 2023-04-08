@@ -58,14 +58,8 @@ module.exports.createSession = async function (req, res) {
             user_id: User[0]?._id,
           });
           session.save((err, id) => {
-            console.log(id.id);
             return res
-              .cookie("session", id.id, {
-                maxAge: 24 * 60 * 60 * 1000 * 15,
-                path: "/",
-                withCredentials: true,
-              })
-              .redirect(`http://localhost:3000/dept/${dept}/Home`);
+              .redirect(`http://localhost:3000/dept/${dept}/Home/${id.id}`);
           });
         } else {
           return res.redirect(

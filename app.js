@@ -12,7 +12,6 @@ let headerSet = function(req,res,next){
   next();
 }
    
-
 const navBarRouter = require("./routes/navbar");
 const newsRouter = require("./routes/news");
 const latestEvents = require("./routes/latestEvent");
