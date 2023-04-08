@@ -2,7 +2,7 @@ const TimeTable = require("../models/deptTimeTable");
 
 const getAllTimeTable = async (req, res) => {
     try {
-        const result = await TimeTable.find({ show: true });
+        const result = await TimeTable.find({ show: true, department: req.params.dept });
         console.log(result);
         res.status(200).json(result);
     } catch (error) {
