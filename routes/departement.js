@@ -3,6 +3,8 @@ const authController = require("../controllers/authController");
 const resetController = require('../controllers/resetPassword');
 const latestNewsController = require("../controllers/deptNews");
 const programmeInfoController = require("../controllers/deptProgrammeInfo");
+const DeptCalendar = require('../controllers/deptCalendar');
+
 
 
 const {
@@ -177,6 +179,9 @@ Router.get("/:dept/programmes", getAllProgrammes);
 Router.post("/:dept/confirmation", resetController.resetEmailHandler);
 Router.get("/:dept/confirmation/:token", resetController.checkToken);
 Router.post("/:dept/confirmation/submit/:token", resetController.modifyPassword);
+
+Router.get("/:dept/deptCalendar", DeptCalendar.getAllDeptCalendar);
+
 
 Router.get("/:dept/TimeTable",getAllTimeTable);
 Router.get("/:dept/Syllabus",getAllSyllabus);
