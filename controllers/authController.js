@@ -2,6 +2,7 @@ const Faculty = require("../models/Faculty");
 const PhdScholar = require("../models/PhdScholar");
 const Sessions = require("../models/Session");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 module.exports.signInAuthentication = async function (req, res, next) {
   const id = req.params.id;
@@ -14,7 +15,6 @@ module.exports.signInAuthentication = async function (req, res, next) {
       const sessionID = cookie.session;
 
       let session = await Sessions.findById(sessionID);
-
       if (session) {
         if (session.user_id == id) {
           req.user = {
@@ -82,17 +82,16 @@ module.exports.createSession = async function (req, res) {
 module.exports.deleteSession = async (req, res) => {
   const cookie = req.cookies;
   const dept = req.params.dept;
-  console.log("Here");
   if (!cookie) return res.status(400).json({ status: false });
   const sessionID = cookie.session;
   if (!sessionID) return res.status(400).json({ status: false });
   try {
-    const session = await Sessions.findById(sessionID);
-    console.log(session);
-    await Sessions.deleteOne({ _id: sessionID });
-    return res
-      .cookie("session", sessionID, { expires: new Date().getTime(), withCredentials: true })
-      .status(200);
+    console.log(sessionID);
+    await Sessions.deleteOne({ _id: mongoose.Types.ObjectId(sessionID) });
+
+    // return res
+    //   .cookie("session", sessionID, { expires: new Date().getTime(), withCredentials: true })
+    //   .status(200);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ status: false });
