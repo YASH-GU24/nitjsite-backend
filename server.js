@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const app = require("./app");
+const express = require('express');
 
 // process.on("unhandledRejection", (err) => {
 //   console.log("unhandleed rejection occured");
@@ -9,9 +10,6 @@ const app = require("./app");
 //     process.exit(1);
 //   });
 // });
-
-
-
 
 dotenv.config({ path: "./.env" });
 

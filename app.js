@@ -1,7 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
+//initialize app
+const app = express();
 
+let headerSet = function(req,res,next){
+  res.header('Access-Control-Allow-Origin', "http://localhost:3000");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+}
+   
 
 const navBarRouter = require("./routes/navbar");
 const newsRouter = require("./routes/news");
@@ -33,6 +43,7 @@ const departmentRouter = require("./routes/departement");
 const searchRouter = require("./routes/search");
 const newpageRouter = require("./routes/newpage");
 const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 const bodyParser = require("body-parser");
 const hostelRouter = require("./routes/hostel");
 const proctorialCellRouter = require("./routes/proctorialCell");
@@ -43,8 +54,7 @@ const admissionsRoutes = require('./routes/admissionsRoutes');
 const researchRoutes = require('./routes/researchRoutes');
 const recruitmentsRoutes = require('./routes/recruitmentRoutes');
 
-//initialize app
-const app = express();
+
 
 //admin panel
 app.use(admin_panel.options.rootPath, router);
@@ -52,7 +62,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(compression());
-app.use(cookieParser());
+
 app.use(bodyParser.json({ limit: "5mb" }));
 bodyParser.urlencoded({ extended: true });
 app.use( express.static( __dirname + '/public' ));
@@ -71,6 +81,8 @@ app.use(
 //routes
 
 // app.use("/login",login);
+
+
 
 // app.route('/*').post(verifyUser).put(verifyUser).delete(verifyUser);
 app.use("/navbar", navBarRouter);
@@ -100,7 +112,7 @@ app.use("/academicCalendar", academicCalendarRouter);
 app.use("/deptCalendar", deptCalendarRouter);
 
 app.use("/search", searchRouter);
-app.use("/dept", departmentRouter);
+app.use("/dept",headerSet, departmentRouter);
 app.use('/newpage',newpageRouter)
 app.use("/resource", resourceRouter);
 app.use("/upload", upload);

@@ -48,7 +48,6 @@ module.exports.createSession = async function (req, res) {
   const dept = req.params.dept;
   try {
     const User = await Faculty.find({ email: req.body.email });
-    console.log(User);
     if (User.length == 0) {
       return res.redirect(`http://localhost:3000/dept/${dept}/login/failed`);
     } else {
@@ -58,10 +57,10 @@ module.exports.createSession = async function (req, res) {
           const session = await Sessions.create({
             user_id: User[0]?._id,
           });
-          
           session.save((err, id) => {
+            console.log(id.id);
             return res
-              .cookie("session", id._id, {
+              .cookie("session", id.id, {
                 maxAge: 24 * 60 * 60 * 1000 * 15,
                 path: "/",
                 withCredentials: true,
@@ -83,17 +82,19 @@ module.exports.createSession = async function (req, res) {
 module.exports.deleteSession = async (req, res) => {
   const cookie = req.cookies;
   const dept = req.params.dept;
+  console.log("Here");
   if (!cookie) return res.status(400).json({ status: false });
   const sessionID = cookie.session;
   if (!sessionID) return res.status(400).json({ status: false });
   try {
     const session = await Sessions.findById(sessionID);
+    console.log(session);
     await Sessions.deleteOne({ _id: sessionID });
-    res
-      .cookie("session", "expire", { maxAge: 1, withCredentials: true })
+    return res
+      .cookie("session", sessionID, { expires: new Date().getTime(), withCredentials: true })
       .status(200);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: false });
+    return res.status(500).json({ status: false });
   }
 };
