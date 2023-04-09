@@ -103,7 +103,7 @@ Router.post(
   "/:dept/login",
   authController.createSession
 );
-Router.get("/:dept/logout",authController.deleteSession);
+Router.get("/:dept/logout/:token",authController.deleteSession);
 // Router.get('/:dept/Faculty/:id', authController.checkAuthentication)
 
 Router.get("/:dept/Acadcord", getByDeptCoordinator);

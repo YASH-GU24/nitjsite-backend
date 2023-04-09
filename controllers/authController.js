@@ -17,10 +17,6 @@ module.exports.signInAuthentication = async function (req, res, next) {
     if (flag) {
       const sessionID = cookie;
 
-      console.log("cookie", cookie);
-
-      console.log(sessionID, "outside before. Just for checking the type");
-
       let session = await Sessions.findById(sessionID);
       if (session) {
         if (session.user_id == id) {
@@ -38,8 +34,6 @@ module.exports.signInAuthentication = async function (req, res, next) {
         next();
         return;
       } else {
-        console.log(sessionID, "False scope.");
-        console.log(typeof(sessionID), "Type inside false scope");
         req.user = {
           isFaculty: false,
           login: false,
@@ -86,14 +80,10 @@ module.exports.createSession = async function (req, res) {
 };
 
 module.exports.deleteSession = async (req, res) => {
-  const cookie = req.cookies;
-  const dept = req.params.dept;
+  const cookie = req.params.token;
   if (!cookie) return res.status(400).json({ status: false });
-  const sessionID = cookie.session;
-  if (!sessionID) return res.status(400).json({ status: false });
   try {
-    console.log(sessionID);
-    await Sessions.deleteOne({ _id: mongoose.Types.ObjectId(sessionID) });
+    await Sessions.deleteOne({ _id: mongoose.Types.ObjectId(cookie) });
 
     // return res
     //   .cookie("session", sessionID, { expires: new Date().getTime(), withCredentials: true })
