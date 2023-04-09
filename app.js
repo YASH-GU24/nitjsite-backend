@@ -72,7 +72,8 @@ app.get("/", (req, res) => {
 //allowing all cross origin requests
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true
   })
 );
 
