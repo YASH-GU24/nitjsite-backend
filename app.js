@@ -11,6 +11,9 @@ let headerSet = function(req,res,next){
   res.header('Access-Control-Allow-Credentials', true);
   next();
 }
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
    
 const navBarRouter = require("./routes/navbar");
 const newsRouter = require("./routes/news");
@@ -40,8 +43,7 @@ const upcomingEventRouter = require("./routes/upcomingEvent");
 const departmentRouter = require("./routes/departement");
 const searchRouter = require("./routes/search");
 const newpageRouter = require("./routes/newpage");
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+
 const bodyParser = require("body-parser");
 const hostelRouter = require("./routes/hostel");
 const proctorialCellRouter = require("./routes/proctorialCell");

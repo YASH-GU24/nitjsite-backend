@@ -6,14 +6,14 @@ const mongoose = require("mongoose");
 
 module.exports.signInAuthentication = async function (req, res, next) {
   const id = req.params.id;
-  const cookie = req.cookies;
+  const cookie = req.headers.cookie.split(';').find(cookie => cookie.trim().startsWith('session=')).split('=')[1];
   var flag = false;
   
   if (cookie) flag = true;
 
   try {
     if (flag) {
-      const sessionID = cookie.session;
+      const sessionID = cookie;
 
       console.log("cookie", cookie);
 
