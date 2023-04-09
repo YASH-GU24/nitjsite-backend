@@ -110,7 +110,8 @@ Router.get("/:dept/Acadcord", getByDeptCoordinator);
 
 
 Router.get("/:dept/Faculty", getByDeptFaculty);
-Router.get("/:dept/Faculty/:id",authController.signInAuthentication,getByIdFaculty);
+Router.get("/:dept/Faculty/:id/:token",authController.signInAuthentication,getByIdFaculty);
+Router.get("/:dept/Faculty/:id",getByIdFaculty);
 Router.post("/:dept/Faculty", addFaculty);
 Router.put("/:dept/Faculty/:id", authController.signInAuthentication,updateFaculty);
 Router.delete("/:dept/Faculty/:id", deleteFaculty);
