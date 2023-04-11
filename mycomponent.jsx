@@ -1,28 +1,30 @@
-import { InputGroup, Label,PropertyInShow,Box,useRecord,BasePropertyComponent } from '@admin-bro/design-system'
+// import { InputGroup, Label,PropertyInShow,Box,useRecord,BasePropertyComponent } from '@admin-bro/design-system'
 
-// const MyReactComponent = (props) => {
-//   const { record, property } = props
-//   const value = record.params[property.path] 
-//   return (
-//     <InputGroup>
-//     <Label>{property.name}</Label>
-//     {value}
-//     </InputGroup>
+// // const MyReactComponent = (props) => {
+// //   const { record, property } = props
+// //   const value = record.params[property.path] 
+// //   return (
+// //     <InputGroup>
+// //     <Label>{property.name}</Label>
+// //     {value}
+// //     </InputGroup>
     
-//   )
-// }
-// export default MyReactComponent
-import { BasePropertyComponent, useRecord, Box, useTranslation } from '@admin-bro/design-system'
+// //   )
+// // }
+// // export default MyReactComponent
+import {Box, Button} from '@admin-bro/design-system'
+import AdminBro, {BasePropertyComponent, useRecord, useTranslation} from 'admin-bro' 
 
-const MyRecordActionComponent = (props) => {
+function MyRecordActionComponent(props) {
   const { record: initialRecord, resource, action } = props
 
   const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
 
   const nameProperty = resource.editProperties.find((property) => property.name === 'name')
+  console.log(nameProperty);
   const surnameProperty = resource.editProperties.find((property) => property.name === 'surname')
-
+  console.log(surnameProperty);
   const handleSubmit = (event) => {
     submit().then(() => {
        // do something

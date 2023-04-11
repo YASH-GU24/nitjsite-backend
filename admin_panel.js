@@ -28,7 +28,6 @@ const DeptImages = require("./models/deptImages");
 const DeptProgrammeInfo = require("./models/deptProgrammeInfo");
 const DeptDescription = require("./models/deptDescription");
 
-
 const Navbar = require("./models/navbar");
 const Footer = require("./models/footer");
 const Clubs = require("./models/club");
