@@ -36,9 +36,6 @@ const hostelRouter = require("./routes/hostel");
 const proctorialCellRouter = require("./routes/proctorialCell");
 const { admin_panel, router } = require("./admin_panel");
 const upload = require("./routes/upload");
-
-const curriculumRouter = require('./routes/curriculum');
-const deptCalendarRouter = require('./routes/deptCalendar');
 const store=require('./routes/store');
 const admissionsRoutes = require("./routes/admissionsRoutes");
 const researchRoutes = require("./routes/researchRoutes");
@@ -98,9 +95,6 @@ app.use("/studentTeam", studentTeamRouter);
 app.use("/club", clubRouter);
 app.use("/upcomingEvent", upcomingEventRouter);
 app.use("/academicCalendar", academicCalendarRouter);
-
-app.use("/deptCalendar", deptCalendarRouter);
-app.use('/curriculum',curriculumRouter);
 
 app.use("/search", searchRouter);
 app.use("/dept", departmentRouter);
