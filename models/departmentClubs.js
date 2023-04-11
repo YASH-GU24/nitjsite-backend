@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const Schema=new mongoose.Schema({
     department:{
         type:String,
-        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
+        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
     },
     name:{
       type:String
@@ -12,19 +12,17 @@ const Schema=new mongoose.Schema({
     img: {type:String},
     type:{
       type:String,
-      enum:["Club","Coordinator","Team","Societies"]
+      enum:["Club","Team","Societies"]
     },
     description: { type: String, default: "" },
     show: { type: Boolean, default: true },
+    FacebookUrl: { type: String },
+    InstagramUrl: { type: String },
+    TwitterUrl: { type: String },
+    LinkedinUrl: { type: String },
     sourceOfInfo: {
-        type: Object,
-        default: {
-          name: null,
-          email: null,
-          designation: null,
-          department: null,
-        }
-      }
+      type:  String
+  },
 },{timestamps:true})
 
 module.exports=mongoose.model("departmentClubs",Schema);

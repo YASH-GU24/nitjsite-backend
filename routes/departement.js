@@ -79,12 +79,6 @@ const {
   updateAwards,
   deleteAwards,
 } = require("../controllers/awardsAndHonors");
-const {
-  addProgrammes,
-  deleteProgrammes,
-  getAllProgrammes,
-  updateProgrammes,
-} = require("../controllers/programmes");
 const { getAllTimeTable } = require("../controllers/deptTimeTable");
 const { getAllSyllabus } = require("../controllers/deptSyllabus");
 const { getByDeptConsultancy, getAllConsultancy } = require("../controllers/deptConsultancy");
@@ -94,6 +88,7 @@ const { getByDeptClubs } = require("../controllers/deptClubs");
 const { getByDeptCoordinator } = require("../controllers/deptCoordinator");
 const { getByDeptDeptImages } = require("../controllers/deptImages");
 const { getByDeptContactUs } = require("../controllers/deptContactUs");
+const { getByDeptDescription } = require("../controllers/deptDescription");
 
 const Router = express.Router();
 
@@ -108,7 +103,7 @@ Router.get("/:dept/Acadcord", getByDeptCoordinator);
 
 
 Router.get("/:dept/Faculty", getByDeptFaculty);
-Router.get("/:dept/Faculty/:id",authController.signInAuthentication,getByIdFaculty);
+Router.get("/:dept/Faculty/:id",getByIdFaculty);
 Router.post("/:dept/Faculty", addFaculty);
 Router.put("/:dept/Faculty/:id", authController.signInAuthentication,updateFaculty);
 Router.delete("/:dept/Faculty/:id", deleteFaculty);
@@ -169,13 +164,9 @@ Router.get("/:dept/awardsAndHonors", getByDeptAwards);
 // Router.put("/:dept/awardsAndHonors/:id", updateAwards);
 // Router.delete("/:dept/awardsAndHonors/:id", deleteAwards);
 
-Router.get("/:dept/programmes", getAllProgrammes);
-// Router.post("/:dept/programmes", addProgrammes);
-// Router.put("/:dept/programmes/:id", updateProgrammes);
-// Router.delete("/:dept/programmes/:id", deleteProgrammes);
 
 Router.post("/:dept/confirmation", resetController.resetEmailHandler);
-Router.get("/:dept/confirmation/:token", resetController.checkToken);
+Router.get("/:dept/confirmation/:token/*", resetController.checkToken);
 Router.post("/:dept/confirmation/submit/:token", resetController.modifyPassword);
 Router.get("/:dept/deptCalendar", DeptCalendar.getAllDeptCalendar);
 
@@ -188,7 +179,7 @@ Router.get("/:dept/Projects",getByDeptProject);
 Router.get("/:dept/SocietyClubs",getByDeptClubs);
 Router.get("/:dept/Images",getByDeptDeptImages);
 Router.get("/:dept/contactus",getByDeptContactUs);
-
+Router.get("/:dept/description",getByDeptDescription);
 Router.route("/:dept/news").get(latestNewsController.getNews);
 Router.route("/:dept/all").get(latestNewsController.getAllNews);
 

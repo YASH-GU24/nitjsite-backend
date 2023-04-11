@@ -1,14 +1,32 @@
+const mongoose = require("mongoose");
+//----------------------------------->
 
-const description = require("../models/deptDescription");
+//Schema---------------------------->
+const deptDescription = new mongoose.Schema(
+    {
 
-const getByDeptDescription = async(req,res)=>{
-    try {
-        const result = await description.findOne({department:req.params.dept,show:true});
-        return res.status(200).json(result);
-    } catch (error) {
-
-        res.status(500).json("Some error Occurred");
-    }
+        description:{
+            type:String
+        },
+        img:{
+            type:String
+        },
+        department: {
+            type: String,
+            enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
+        },
+        show: { type: Boolean, default: true },
+        sourceOfInfo: {
+            type:  String
+        },
+    }, {
+    timestamps: true,
 }
+);
 
-module.exports = {getByDeptDescription};
+//Model---------------------------->
+const Model = mongoose.model("deptDescription", deptDescription);
+
+//Export----------------------------->
+module.exports = Model;
+

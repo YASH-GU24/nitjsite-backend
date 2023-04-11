@@ -6,10 +6,9 @@ const DeptNewsSchema = new mongoose.Schema(
   {
     department: {
       type: String,
-      enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
+      enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
     },
     title: { type: String, required: true },
-    title2: { type: String, default: "" },
     desc: { type: String, default: "" },
     order: {
       type: Number,
@@ -19,30 +18,12 @@ const DeptNewsSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    newPage: {
-      type: Boolean,
-      default: true,
-    },
     pdfLink: {
       type: String,
     },
-    sourceOfInfoName: {
-      type: String,
-    },
-    sourceOfInfoEmail: {
-      type: String,
-    },
-    sourceOfInfoDesignation: {
-      type: String,
-    },
-    sourceOfInfoDepartment: {
-      type: String,
-      enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
-    },
-    type: {
-      type: String,
-      enum: ['Academics']
-    },
+    sourceOfInfo: {
+      type:  String
+  },
     show: { type: Boolean, default: true },
     updateLogs: {
       type: Array,

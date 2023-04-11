@@ -3,12 +3,14 @@ const nodemailer = require("../config/reset_password_mailer");
 const crypto = require("crypto");
 const ResetPassword = require("../models/ResetPassword");
 const bcrypt = require("bcrypt");
-
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+url=process.env.DEPT_URL
 module.exports.resetEmailHandler = async function (req, res) {
   try {
     const faculty = await Faculty.find({ email: req.body.email });
     const dept = req.params.dept;
-
+    // url="http://nitjintranet.ac.in:8081"
 
     if (faculty[0]?._id) {
       const token = crypto.randomBytes(20).toString("hex");
@@ -26,32 +28,28 @@ module.exports.resetEmailHandler = async function (req, res) {
           to: req.body.email,
           subject: "Reset your Password",
           html: `<div>
-                <button class="rounded-xl p-2 hover:bg-red-400 bg-red-200"><a href="http://localhost:3000/dept/confirmation/${token}">Reset your password</a></button>
-            
-                <p>If the above button does not work, please copy this link and open in your browser :</p>
-            
-                <h1>
-                    <a href="http://localhost:3000/dept/${dept}/confirmation/${token}">http://localhost:3000/dept/${dept}/confirmation/${token}</a>
-                </h1>
+                    <a href="${url}/dept/${dept}/confirmation/${token}">
+                    "${url}/dept/${dept}/confirmation/${token}"
+                    </a>
             </div>`,
         },
         function (err, info) {
           if (err) {
             console.log(err);
             return res.redirect(
-              "http://localhost:3000/dept/cse/onClickForgotPass/failure"
+              `${url}/dept/cse/onClickForgotPass/failure`
             );
           }
 
           return res.redirect(
-            "http://localhost:3000/dept/cse/onClickForgotPass/success"
+            `${url}/dept/cse/onClickForgotPass/success`
           );
         }
       );
     }
     else
     return res.redirect(
-      "http://localhost:3000/dept/cse/onClickForgotPass/failure/"
+      `${url}/dept/cse/onClickForgotPass/failure/`
     );
   } catch (err) {
     console.log(err);
@@ -102,9 +100,9 @@ module.exports.modifyPassword = async function (req, res) {
         });
         return res
           .status(200)
-          .redirect(`http://localhost:3000/dept/${dept}/faculty/${id}`);
+          .redirect(`${url}/dept/${dept}/faculty/${id}`);
       }
     }
-    return res.status(200).redirect(`http://localhost:3000/${dept}/facult`);
+    return res.status(200).redirect(`${url}/${dept}/faculty`);
   }
 };
