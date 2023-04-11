@@ -693,13 +693,6 @@ const AdminBroOptions = {
     { resource: About, options: { navigation: 'About', actions: { list: { isAccessible: isAdmin } } } },
     {
       resource: Faculty, options: {
-        properties: {
-          education_qualification: {
-            components: {
-              edit: AdminBro.bundle('./mycomponent'),
-            },
-          },
-        },
         navigation: 'Faculty', actions: {
           list: {
             layout: (currentAdmin) => {
