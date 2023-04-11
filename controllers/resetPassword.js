@@ -28,8 +28,8 @@ module.exports.resetEmailHandler = async function (req, res) {
           to: req.body.email,
           subject: "Reset your Password",
           html: `<div>
-                    <a href="${url}/dept/${dept}/confirmation/${token}">
-                    "${url}/dept/${dept}/confirmation/${token}"
+                    <a href="${url}/dept/${dept}/confirmation/${token}/success">
+                    ${url}/dept/${dept}/confirmation/${token}/success
                     </a>
             </div>`,
         },
