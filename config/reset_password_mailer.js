@@ -1,14 +1,14 @@
 const nodemailer = require('nodemailer');
-const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
+// const env = require('../.env');
+
 const smtp = {
     service: 'gmail',
     host: 'smtp.gmail.com',
     port: 587,
     secure: 'false',
     auth: {
-        user: process.env.USER,
-        pass: process.env.TOKEN
+        user: 'adityag.it.21@nitj.ac.in',
+        pass: 'rekmlukexcjapxua'
     }
 };
 

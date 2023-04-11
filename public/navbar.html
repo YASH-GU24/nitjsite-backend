@@ -17,7 +17,7 @@
         <option value="">Select Menu</option>
         <option value="Administration">Administration</option>
         <option value="Admissions">Admissions</option>
-        <option value="Acadmeics">Academics</option>
+        <option value="Academics">Academics</option>
         <option value="Research">Research</option>
         <option value="Alumni">Alumni</option>
         <option value="LifeatNITJ">LifeatNITJ</option>
@@ -53,15 +53,14 @@
         class="w-72 h-10 border-2 border-black rounded-lg p-2 py-2 my-2"
         placeholder="Enter Order"
       />
-        <button
-          id="edit"
-          onclick="handleEditSubmit()"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5"
-          style="display: none"
-        >
-          Edit
-        </button>
-    
+      <button
+        id="edit"
+        onclick="handleEditSubmit()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5"
+        style="display: none"
+      >
+        Edit
+      </button>
     </div>
     <div class="flex flex-col m-2">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -99,12 +98,12 @@
           "Cells",
           "Committees",
         ],
-        Acadmeics: [
+        Academics: [
           "Departments",
           "Centers",
           "Academic System",
           "Academic Services",
-          "Academic facilities",
+          "Allied facilities",
           "Programs of study",
           "convocation",
           "other links",
@@ -121,7 +120,7 @@
           "Consultancy @NITJ",
           "Upcoming Events",
         ],
-        Alumni: ["Alumni"],
+        Alumni: ["SARC"],
         LifeatNITJ: [
           "Club & Socities",
           "Scholarships",
@@ -263,7 +262,6 @@
       }
 
       async function handleEditSubmit() {
-        
         let url = `https://wdmc-vsj1.onrender.com/navbar/edit`;
         let menu = document.getElementById("menu").value;
         let submenu = document.getElementById("submenu").value;
@@ -276,7 +274,7 @@
         await fetch(url, {
           method: "POST",
           body: JSON.stringify({
-            id:id,
+            id: id,
             name: name,
             link: link,
             order: parseInt(order),
@@ -288,7 +286,7 @@
           },
         });
 
-        url=`https://wdmc-vsj1.onrender.com/navbar/sort`;
+        url = `https://wdmc-vsj1.onrender.com/navbar/sort`;
 
         await fetch(url, {
           method: "POST",

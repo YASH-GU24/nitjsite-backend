@@ -48,6 +48,7 @@ module.exports.createSession = async function (req, res) {
   const dept = req.params.dept;
   try {
     const User = await Faculty.find({ email: req.body.email });
+    console.log(User);
     if (User.length == 0) {
       return res.redirect(`http://localhost:3000/dept/${dept}/login/failed`);
     } else {

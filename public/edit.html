@@ -20,22 +20,20 @@
         />
 
         <textarea name="editor1"></textarea>
-        <input type="hidden" name="show" id="show" value="" />
+        <!-- <input type="hidden" name="show" id="show" value="" /> -->
         <input type="hidden" name="id" id="id" value="" />
         <button
           class="m-2 rounded-lg text-white bg-blue-700 w-36 h-10"
+          onclick="handleSave()"
         >
           Save
         </button>
-    </form>
-    <a href="/admin/newpage">
-
-        <button
-          class="m-2 rounded-lg text-white bg-blue-700 w-36 h-10"
-        >
+      </form>
+      <a href="/admin/store">
+        <button class="m-2 rounded-lg text-white bg-blue-700 w-36 h-10">
           Back
         </button>
-    </a>
+      </a>
     </div>
   </body>
   <script>
@@ -46,7 +44,7 @@
       let url = window.location.href;
       let id = url.split("/").pop();
 
-      let u = `https://wdmc-vsj1.onrender.com/newpage/${id}`;
+      let u = `/store/${id}`;
 
       fetch(u, {
         method: "GET",
@@ -57,10 +55,9 @@
         .then((res) => {
           res.json().then((data) => {
             console.log(data);
-            document.getElementById("title").value = data.title;
+            document.getElementById("title").value=data.title;
+            document.getElementById("id").value=data._id;
             CKEDITOR.instances.editor1.setData(data.content);
-            document.getElementById("show").value = data.show;
-            document.getElementById("id").value = data._id;
           });
         })
         .catch((err) => {
@@ -76,11 +73,11 @@
     async function handleSave() {
       const content = CKEDITOR.instances.editor1.getData();
       const title = document.getElementById("title").value;
-      const show = document.getElementById("show").value;
+      
       const id = document.getElementById("id").value;
 
-      let url = `https://wdmc-vsj1.onrender.com/newpage/${id}`;
-    
+      let url = `/store/${id}`;
+
       await fetch(url, {
         method: "PUT",
         headers: {
@@ -89,7 +86,6 @@
         body: JSON.stringify({
           title: title,
           content: content,
-          show: show,
         }),
       });
 

@@ -1,29 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose=require('mongoose');
 
-const Schema = new mongoose.Schema({
-    department: {
-        type: String,
-        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf', 'cee', 'cai']
+const Schema=new mongoose.Schema({
+    department:{
+        type:String,
+        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
     },
-    name: {
-        type: String
+    name:{
+        type:String
     },
-    email: {
-        type: String
+    email:{
+        type:String
     },
-    img: {
-        type: String
+    img:{
+        type:String
     },
-    position: {
-        type: String
+    position:{
+        type:String
     },
+    
     sourceOfInfo: {
-        type:  String
-    },
+        type: Object,
+        default: {
+          name: null,
+          email: null,
+          designation: null,
+          department: null,
+        }
+      },
     show: { type: Boolean, default: true },
-    order: {
+    order:{
         type: Number,
     }
-}, { timestamps: true })
+},{timestamps:true})
 
-module.exports = mongoose.model("Staff", Schema);
+module.exports=mongoose.model("Staff",Schema);

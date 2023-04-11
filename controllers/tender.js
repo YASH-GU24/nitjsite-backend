@@ -19,12 +19,12 @@ exports.showTender = async (req, res) => {
 
 exports.showTenderbyId = async (req, res) => {
   if (req.query.id) {
-    Tender.findById(req.query.id)
-      .then((data) => res.status(200).send(data))
+    Tender.find({_id:req.query.id})
+      .then((data) => res.status(200).json(data))
       .catch((err) => res.status(400).json("Error: " + err));
   } else {
     Tender.find({ show: true })
-      .then((data) => res.status(200).send(data))
+      .then((data) => res.status(200).json(data))
       .catch((err) => res.status(400).json("Error: " + err));
   }
 };
@@ -47,6 +47,6 @@ exports.deleteTender = async (req, res) => {
 
 exports.showAllTender = async (req, res) => {
   Tender.find({})
-    .then((data) => res.status(200).send(data))
+    .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json("Error: " + err));
 };

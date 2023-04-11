@@ -26,14 +26,23 @@ const ConsultancySchema = new mongoose.Schema(
 
         department: {
             type: String,
-            enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
+            enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
         },
         show: { type: Boolean, default: true },
         order: {
             type: Number,
         },
+        new: {
+            type: Boolean,
+        },
         sourceOfInfo: {
-            type:  String
+            type: Object,
+            default: {
+                name: null,
+                email: null,
+                designation: null,
+                department: null,
+            }
         },
     }, {
     timestamps: true,

@@ -10,7 +10,7 @@ const Schema = new mongoose.Schema(
     title2:{
       type:String
     },
-    description:{
+    desc:{
       type:String
     },
     show:{type:Boolean,default:true},

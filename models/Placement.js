@@ -4,7 +4,7 @@ const Schema = new mongoose.Schema(
   {
     department: {
       type: String,
-      enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
+      enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
     },
     name: {
       type: String,
@@ -18,9 +18,21 @@ const Schema = new mongoose.Schema(
     package: {
       type: Number,
     },
-    sourceOfInfo: {
-      type:  String
-  },
+    sourceOfInfoName: {
+      type: String,
+    },
+    sourceOfInfoEmail: {
+      type: String,
+    },
+    sourceOfInfoDesignation: {
+      type: String,
+    },
+    sourceOfInfoDepartment: {
+      type: String,
+    },
+    newPage: {
+      type: Boolean,
+    },
     show: { type: Boolean, default: true },
     order: {
       type: Number,

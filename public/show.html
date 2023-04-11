@@ -16,25 +16,20 @@
             <table class="min-w-full text-left text-sm font-light">
               <thead class="border-b font-medium dark:border-neutral-500">
                 <tr>
-                  <th scope="col" class="px-6 py-4">Link</th>
                   <th scope="col" class="px-6 py-4">Title</th>
                   <th scope="col" class="px-6 py-4">Content</th>
-                  <th scope="col" class="px-6 py-4">Show</th>
-                  <th scope="col" class="px-6 py-4">Edit</th>
-                  <th scope="col" class="px-6 py-4">Enable/ Disable</th>
                 </tr>
               </thead>
               <tbody id="table"></tbody>
             </table>
-            <a href="/admin/newpage/add">
-              
-              <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5"
-              >
-                Add New Page
-              </button>
-            </a>
           </div>
+          <a href="/admin/store/add">
+
+            <button 
+            class="m-2 rounded-lg text-white bg-blue-700 w-36 h-10">
+              Add new
+          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -43,7 +38,7 @@
       function showTable() {
         let table = document.getElementById("table");
         table.innerHTML = "";
-        let url = "https://wdmc-vsj1.onrender.com/newpage";
+        let url = "/store/get/all";
         fetch(url, {
           method: "GET",
           headers: {
@@ -52,39 +47,27 @@
         })
           .then((res) => {
             res.json().then((data) => {
+              console.log(data);
 
               for (let i = 0; i < data.length; i++) {
                 let d = data[i];
 
                 let tr = document.createElement("tr");
-                let td=document.createElement("td");
+                let td = document.createElement("td");
                 let td1 = document.createElement("td");
-                let td2 = document.createElement("td");
-                let td3 = document.createElement("td");
-                let td4 = document.createElement("td");
-                let td5 = document.createElement("td");
+                let td2=document.createElement("td");
 
                 td.className = "whitespace-nowrap px-6 py-4";
                 td1.className = "whitespace-nowrap px-6 py-4";
                 td2.className = "whitespace-nowrap px-6 py-4";
-                td3.className = "whitespace-nowrap px-6 py-4";
-                td4.className = "whitespace-nowrap px-6 py-4";
-                td5.className = "whitespace-nowrap px-6 py-4";
+                td.innerHTML = d.title;
+                td1.innerHTML = d.content;
+                td2.innerHTML=`<a href="/admin/store/edit/${d._id}">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded">Edit</button></a>`
 
-                td.innerHTML = `<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="copy('${d._id}')">Copy</button>`;
-                td1.innerHTML = d.title;
-                td2.innerHTML = d.content;
-                td3.innerHTML = d.show;
-                td4.innerHTML = `<a href="/admin/newpage/edit/${d._id}">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded">Edit</button></a>`;
-                td5.innerHTML = `<button onclick="handleDelete('${d._id}','${d.show}')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded">${d.show===true?"Disable":"Enable"}</button>`;
-                
                 tr.appendChild(td);
                 tr.appendChild(td1);
                 tr.appendChild(td2);
-                tr.appendChild(td3);
-                tr.appendChild(td4);
-                tr.appendChild(td5);
 
                 tr.className = "border-b dark:border-neutral-500";
                 table.appendChild(tr);
@@ -96,28 +79,12 @@
           });
       }
 
-      async function handleDelete(id,show) {
-        let url = `https://wdmc-vsj1.onrender.com/newpage/${id}`;
-        show=show=="true"?false:true;
-        
-        await fetch(url, {
-          method: "POST",
-          body: JSON.stringify({show:show}),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }); 
+      // function copy(id) {
+      //   let copyText = `https://nitjmain.onrender.com/template/index.html?id=${id}?category=newpage`;
 
-        showTable();
-        
-      }
-
-      function copy(id) {
-        let copyText = `https://nitjmain.onrender.com/template/index.html?id=${id}?category=newpage`;
-        
-        navigator.clipboard.writeText(copyText);
-        alert("Copied the text: " + copyText);
-      }
+      //   navigator.clipboard.writeText(copyText);
+      //   alert("Copied the text: " + copyText);
+      // }
     </script>
   </body>
 </html>
