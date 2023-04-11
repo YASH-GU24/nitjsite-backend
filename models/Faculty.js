@@ -4,7 +4,7 @@ const passport = require('passport');
 const Schema = new mongoose.Schema({
     department: {
         type: String,
-        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf','cee','cai']
+        enum: ['bt', 'ch', 'cy', 'ce', 'cse', 'ee', 'ece', 'hm', 'ipe', 'it', 'ice', 'ma', 'me', 'ph', 'tt', 'cf']
     },
     name: {
         type: String
@@ -19,57 +19,12 @@ const Schema = new mongoose.Schema({
         type: String
     },
     education_qualification: {
-        type: [
-            {
-                "column": {
-                    type: String
-                },
-                "degree": {
-                    type: String
-                },
-                "field": {
-                    type: String
-                },
-                "clg": {
-                    type: String
-                },
-                "year": {
-                    type: String
-                },
-            }
-        ],
+        type: Array,
         default: []
     },
     address: {
-        type: [
-            {
-                "address1": {
-                    type: String
-                },
-                "address2": {
-                    type: String
-                },
-                "city": {
-                    type: String
-                },
-                "state": {
-                    type: String
-                },
-                "pin": {
-                    type: String
-                },
-                "eid": {
-                    type: String
-                },
-                "phone": {
-                    type: String
-                },
-                "fax": {
-                    type: String
-                },
-            }
-        ],
-        default: []
+        type: Object,
+        default: {}
     },
     gender: {
         type: String,
@@ -86,6 +41,10 @@ const Schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+    },
+    password: {
+        type: String,
+        required: false,
     },
     dob: {
         type: String,
@@ -362,7 +321,13 @@ const Schema = new mongoose.Schema({
     },
 
     sourceOfInfo: {
-        type:  String
+        type: Object,
+        default: {
+            name: null,
+            email: null,
+            designation: null,
+            department: null,
+        }
     },
     show: { type: Boolean, default: true },
     order: {

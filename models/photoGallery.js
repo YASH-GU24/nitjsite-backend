@@ -19,9 +19,12 @@ const Schema = new mongoose.Schema(
     },
     show: {
       type: Boolean,
+      default: true,
     },
     explore: {
-      type: String,
+      type: Boolean,
+      default: true,
+
     },
     sourceOfInfoName: {
       type: String,

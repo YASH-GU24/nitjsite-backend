@@ -1,4 +1,4 @@
-const IPR = require('../../models/research/MoUs');
+const IPR = require('../../models/research/IPRs');
 const { sendError, validateID } = require('../../utils');
 
 const getIPRs = (req, res) => {

@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const compression = require("compression");
 
-
 const navBarRouter = require("./routes/navbar");
 const newsRouter = require("./routes/news");
 const latestEvents = require("./routes/latestEvent");
@@ -38,11 +37,12 @@ const proctorialCellRouter = require("./routes/proctorialCell");
 const { admin_panel, router } = require("./admin_panel");
 const upload = require("./routes/upload");
 
-const admissionsRoutes = require('./routes/admissionsRoutes');
-const researchRoutes = require('./routes/researchRoutes');
-const recruitmentsRoutes = require('./routes/recruitmentRoutes');
 const curriculumRouter = require('./routes/curriculum');
 const deptCalendarRouter = require('./routes/deptCalendar');
+const store=require('./routes/store');
+const admissionsRoutes = require("./routes/admissionsRoutes");
+const researchRoutes = require("./routes/researchRoutes");
+const recruitmentsRoutes = require("./routes/recruitmentRoutes");
 
 //initialize app
 const app = express();
@@ -56,7 +56,7 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: "5mb" }));
 bodyParser.urlencoded({ extended: true });
-app.use( express.static( __dirname + '/public' ));
+app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -104,44 +104,45 @@ app.use('/curriculum',curriculumRouter);
 
 app.use("/search", searchRouter);
 app.use("/dept", departmentRouter);
-app.use('/newpage',newpageRouter)
+app.use("/newpage", newpageRouter);
 app.use("/resource", resourceRouter);
 app.use("/upload", upload);
 
 app.use("/hostel", hostelRouter);
 app.use("/proctorialCell", proctorialCellRouter);
 
-app.use('/admissions', admissionsRoutes);
-app.use('/research', researchRoutes);
-app.use('/recruitments', recruitmentsRoutes);
+app.use("/admissions", admissionsRoutes);
+app.use("/research", researchRoutes);
+app.use("/recruitments", recruitmentsRoutes);
+app.use('/store',store);
 
-app.get('/admin/ckeditor',(req,res)=>{
+app.get("/admin/ckeditor", (req, res) => {
+  res.sendFile(__dirname + "/public/add.html");
+});
+
+app.get("/admin/upload", (req, res) => {
+  res.sendFile(__dirname + "/public/upload.html");
+});
+
+app.get("/admin/store", (req, res) => {
+  res.sendFile(__dirname + "/public/show.html");
+});
+
+app.get('/admin/store/add',(req,res)=>{
   res.sendFile(__dirname + '/public/add.html');
 })
 
-app.get('/admin/upload',(req,res)=>{
-  res.sendFile(__dirname + '/public/upload.html');
-})
+app.get("/admin/store/edit/:id", (req, res) => {
+  res.sendFile(__dirname + "/public/edit.html");
+});
 
-// app.get('/admin/newpage/add',(req,res)=>{
-//   res.sendFile(__dirname + '/public/add.html');
-// })
+app.get("/admin/navbar", (req, res) => {
+  res.sendFile(__dirname + "/public/navbar.html");
+});
 
-// app.get('/admin/newpage/edit/:id',(req,res)=>{
-//   res.sendFile(__dirname + '/public/edit.html');
-// })
-
-app.get('/admin/navbar',(req,res)=>{
-  res.sendFile(__dirname + '/public/navbar.html');
-})
-
-app.get('/admin/navbar/add',(req,res)=>{
-  res.sendFile(__dirname + '/public/navbaradd.html');
-})
-
-
+app.get("/admin/navbar/add", (req, res) => {
+  res.sendFile(__dirname + "/public/navbaradd.html");
+});
 
 //Export----------------------------->
 module.exports = app;
-
-
