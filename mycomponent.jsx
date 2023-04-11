@@ -21,10 +21,10 @@ function MyRecordActionComponent(props) {
   const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
 
-  const nameProperty = resource.editProperties.find((property) => property.name === 'name')
+  const nameProperty = resource.editProperties.find((property) => property.name === 'education_qualification')
   console.log(nameProperty);
-  const surnameProperty = resource.editProperties.find((property) => property.name === 'surname')
-  console.log(surnameProperty);
+  // const surnameProperty = resource.editProperties.find((property) => property.name === 'surname')
+  // console.log(surnameProperty);
   const handleSubmit = (event) => {
     submit().then(() => {
        // do something
@@ -40,13 +40,6 @@ function MyRecordActionComponent(props) {
         where="edit"
         onChange={handleChange}
         property={nameProperty}
-        resource={resource}
-        record={record}
-      />
-      <BasePropertyComponent
-        where="edit"
-        onChange={handleChange}
-        property={surnameProperty}
         resource={resource}
         record={record}
       />

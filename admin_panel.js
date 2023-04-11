@@ -1362,7 +1362,15 @@ const AdminBroOptions = {
     { resource: About, options: { navigation: 'About', actions: { list: { isAccessible: isAdmin } } } },
     {
       resource: Faculty, options: {
-        navigation: 'Faculty', actions: {
+        navigation: 'Faculty', 
+        properties: {
+          education_qualification: {
+            components: {
+              show: AdminBro.bundle('./mycomponent'),
+            },
+          },
+        },
+        actions: {
           list: {
             layout: (currentAdmin) => {
               if (currentAdmin.role === 'admin') {
