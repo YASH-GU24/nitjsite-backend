@@ -122,7 +122,9 @@ const canEditprofile = ({ currentAdmin, record }) => {
   if (currentAdmin.role === 'admin') {
     return true;
   }
-
+  if (currentAdmin.role) {
+    return false;
+  }
   if (!record) {
     return true
   }
@@ -1359,6 +1361,13 @@ const AdminBroOptions = {
     { resource: About, options: { navigation: 'About', actions: { list: { isAccessible: isAdmin } } } },
     {
       resource: Faculty, options: {
+        properties: {
+          education_qualification: {
+            components: {
+              edit: AdminBro.bundle('./mycomponent'),
+            },
+          },
+        },
         navigation: 'Faculty', actions: {
           list: {
             layout: (currentAdmin) => {

@@ -75,24 +75,13 @@ const Schema = new mongoose.Schema({
         type: String,
         enum: ['male', 'female', 'other']
     },
-    email: {
-        type: String,
-        required: true,
-    },
     password: {
         type: String,
         required: false,
     },
-    email: {
-        type: String,
-        required: true,
-    },
     dob: {
         type: String,
         default: ''
-    },
-    father_name: {
-        type: String
     },
     designation: {
         type: String
