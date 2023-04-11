@@ -1364,7 +1364,7 @@ const AdminBroOptions = {
       resource: Faculty, options: {
         navigation: 'Faculty', 
         properties: {
-          education_qualification: {
+          name: {
             components: {
               show: AdminBro.bundle('./mycomponent'),
             },
@@ -1392,11 +1392,22 @@ const AdminBroOptions = {
             isAccessible: canEditprofile
           },
           show: {
+            after: async (request, context) => {
+              const adminUser = context.session.adminUser
+              query_fetched = { ...request.query }
+              if (adminUser) {
+                request.record.params.sourceOfInfo = adminUser.email
+              }
+              return {
+                ...request,
+                query: query_fetched
+              }
+            },
             layout: (currentAdmin) => {
               if (currentAdmin.role === 'admin') {
-                return ['_id', 'department', 'name', 'email', 'password', 'img', 'position', 'education_qualification', 'address', 'gender', 'dob', 'designation', 'nationality', 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'sourceOfInfo', 'show', 'order', 'affiliations', 'createdAt', 'updatedAt', '__v'];
+                return ['name'];
               }
-              return ['name', 'email', 'img', 'position', 'department', 'address', 'gender', 'dob', 'designation', 'nationality', 'education_qualification', 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'affiliations'];
+              return ['name'];
             },
             isAccessible: canEditprofile
           },
@@ -1421,21 +1432,12 @@ const AdminBroOptions = {
           edit: {
             layout: (currentAdmin) => {
               if (currentAdmin.role === 'admin') {
-                return ['_id', 'department', 'name', 'email', 'password', 'img', 'position', 'education_qualification', 'address', 'gender', 'dob', 'designation', 'nationality', 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'sourceOfInfo', 'show', 'order', 'affiliations', 'createdAt', 'updatedAt', '__v'];
+                return ['name'];
               }
-              return ['name', 'email', 'img', 'position', 'department', 'address', 'gender', 'dob', 'designation', 'nationality', 'education_qualification', 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'affiliations'];
+              return ['name']
             },
-            isAccessible: canEditprofile,
+            isAccessible: false,
           },
-          new: {
-            layout: (currentAdmin) => {
-              if (currentAdmin.role === 'admin') {
-                return ['_id', 'department', 'name', 'email', 'password', 'img', 'position', 'education_qualification', 'address', 'gender', 'dob', 'designation', 'nationality', 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'sourceOfInfo', 'show', 'order', 'affiliations', 'createdAt', 'updatedAt', '__v'];
-              }
-              return ['name', 'email', 'img', 'position', 'department', 'address', 'gender', 'dob', 'designation', 'nationality', 'education_qualification', , 'book_publications', 'conference_publications', 'admin_responsibility', 'patent', 'phd_supervised', 'phd_dissertion', 'awards', 'research_profile', 'research_project', 'personal_link', 'journal', 'event', 'affiliations'];
-            },
-            isAccessible: isAdmin,
-          }
         }
       }
     },
