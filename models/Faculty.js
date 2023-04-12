@@ -272,8 +272,15 @@ const Schema = new mongoose.Schema({
         default: []
     },
     personal_link: {
-        type:
-            String
+        type:{
+            "Personal Link":{
+                type:String
+            },
+            "Google Scholar Link":{
+                type:String
+            },
+        }
+            
     },
     journal: {
         type: [
