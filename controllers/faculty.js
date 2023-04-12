@@ -53,10 +53,13 @@ const deleteFaculty = async (req, res) => {
 
 const updateFaculty = async (req, res) => {
     try {
-
-        if(req.user){
+        console.log(req.user);
+        if(req.user.login && req.user.isFaculty){
             const result = await Faculty.findById(req.params.id);
+            console.log(req.query);
             await result.update({[req.query.q]:req.body});
+
+            result.save();
             return res.status(200).json("Faculty updated succesfully")
         }
         return res.status(401).json("Faculty not Updated");
