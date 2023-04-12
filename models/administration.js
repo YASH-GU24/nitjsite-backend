@@ -59,7 +59,7 @@ const Schema = new mongoose.Schema(
         fax: null,
       },
     },
-    show: { type: Boolean, default: true },
+    show: { type: Boolean },
 
     order: {
       type: Number,

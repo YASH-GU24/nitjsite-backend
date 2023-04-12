@@ -10,6 +10,9 @@ const Schema=new mongoose.Schema({
       type:String,
       enum:["B.Tech","M.Tech","PhD","PG Diploma"]
     },
+    show:{
+      type: Boolean
+    },
     sourceOfInfo: {
       type:  String
   },

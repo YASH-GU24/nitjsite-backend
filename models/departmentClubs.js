@@ -15,7 +15,7 @@ const Schema=new mongoose.Schema({
       enum:["Club","Team","Societies"]
     },
     description: { type: String, default: "" },
-    show: { type: Boolean, default: true },
+    show: { type: Boolean },
     FacebookUrl: { type: String },
     InstagramUrl: { type: String },
     TwitterUrl: { type: String },

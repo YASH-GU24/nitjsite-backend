@@ -13,7 +13,7 @@ const Schema=new mongoose.Schema({
     sourceOfInfo: {
       type:  String
   },
-    show: { type: Boolean, default: true },
+    show: { type: Boolean },
 },{timestamps:true})
 
 module.exports=mongoose.model("deptStudents",Schema);

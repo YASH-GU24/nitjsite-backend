@@ -10,8 +10,7 @@ const Schema = new Mongoose.Schema({
         unique: true,
     },
     show:{
-        type: Boolean,
-        default: true,
+        type: Boolean
     },
     faculties: [
         {

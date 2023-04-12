@@ -27,7 +27,7 @@ const getByDeptClubs = async (req, res) => {
         if(q){
             query= {...query,type:q};
         }
-        const result = await Clubs.find({ show: true, ...query});
+        const result = await Clubs.find({ show: true, ...query}).sort({order:1});
         res.status(200).json(result);
     } catch (error) {
 

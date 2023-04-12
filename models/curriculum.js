@@ -10,8 +10,7 @@ const Schema = new Mongoose.Schema({
         required: true,
     },
     show:{
-        type: Boolean,
-        default: true,
+        type: Boolean
     },
     links:
         {

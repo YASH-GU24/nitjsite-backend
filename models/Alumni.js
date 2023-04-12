@@ -23,7 +23,7 @@ const Schema=new mongoose.Schema({
           department: null,
         }
       },
-    show: { type: Boolean, default: true },
+    show: { type: Boolean },
     order:{
         type: Number,
     }

@@ -24,7 +24,7 @@ const DeptNewsSchema = new mongoose.Schema(
     sourceOfInfo: {
       type:  String
   },
-    show: { type: Boolean, default: true },
+    show: { type: Boolean },
     updateLogs: {
       type: Array,
       default: [],

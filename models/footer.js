@@ -12,8 +12,7 @@ const Schema = new mongoose.Schema(
       default:""
     },
     show: {
-      type: Boolean,
-      default: true,
+      type: Boolean
     },
     column:{
       type:Number,
