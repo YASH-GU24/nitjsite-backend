@@ -28,6 +28,8 @@ const CoordSchema = new mongoose.Schema(
 //Model---------------------------->
 const Model = mongoose.model("deptImages", CoordSchema);
 
+
 //Export----------------------------->
 module.exports = Model;
+
 
